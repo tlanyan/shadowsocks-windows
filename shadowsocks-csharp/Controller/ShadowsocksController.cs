@@ -500,8 +500,9 @@ namespace Shadowsocks.Controller
                 _pacServer = new PACServer();
                 _pacServer.PACFileChanged += pacServer_PACFileChanged;
                 _pacServer.UserRuleFileChanged += pacServer_UserRuleFileChanged;
+                // update configure only when there is no instance
+                _pacServer.UpdateConfiguration(_config);
             }
-            _pacServer.UpdateConfiguration(_config);
             if (gfwListUpdater == null)
             {
                 gfwListUpdater = new GFWListUpdater();
