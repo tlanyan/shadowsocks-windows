@@ -45,6 +45,15 @@ namespace Shadowsocks
                 return;
             }
 
+            for (int index = 0; index < args.Length; ++index)
+            {
+                Console.WriteLine("arg:" + args[index]);
+                if (args[index].Equals("-c") && index < args.Length - 1)
+                {
+                    Model.Configuration.setConfigFile(args[index + 1]);
+                }
+            }
+
             Utils.ReleaseMemory(true);
             using (Mutex mutex = new Mutex(false, $"Global\\Shadowsocks_{Application.StartupPath.GetHashCode()}"))
             {

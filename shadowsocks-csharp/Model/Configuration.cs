@@ -34,7 +34,7 @@ namespace Shadowsocks.Model
         public ProxyConfig proxy;
         public HotkeyConfig hotkey;
 
-        private static string CONFIG_FILE = "gui-config.json";
+        private static string configFile = "gui-config.json";
 
         public Server GetCurrentServer()
         {
@@ -56,7 +56,7 @@ namespace Shadowsocks.Model
         {
             try
             {
-                string configContent = File.ReadAllText(CONFIG_FILE);
+                string configContent = File.ReadAllText(configFile);
                 Configuration config = JsonConvert.DeserializeObject<Configuration>(configContent);
                 config.isDefault = false;
 
@@ -112,7 +112,7 @@ namespace Shadowsocks.Model
             config.isDefault = false;
             try
             {
-                using (StreamWriter sw = new StreamWriter(File.Open(CONFIG_FILE, FileMode.Create)))
+                using (StreamWriter sw = new StreamWriter(File.Open(configFile, FileMode.Create)))
                 {
                     string jsonString = JsonConvert.SerializeObject(config, Formatting.Indented);
                     sw.Write(jsonString);
@@ -166,6 +166,11 @@ namespace Shadowsocks.Model
             if (timeout <= 0 || timeout > maxTimeout)
                 throw new ArgumentException(
                     I18N.GetString("Timeout is invalid, it should not exceed {0}", maxTimeout));
+        }
+
+        public static void setConfigFile(string file)
+        {
+            configFile = file;
         }
     }
 }
