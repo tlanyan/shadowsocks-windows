@@ -4,8 +4,8 @@ Shadowsocks=Shadowsocks
 
 # Menu items
 
-Enable System Proxy=啟用系統代理
-Mode=系統代理模式
+System Proxy=系統代理
+Disable=禁用
 PAC=PAC 模式
 Global=全局模式
 Servers=伺服器
@@ -61,6 +61,7 @@ Remarks=註解
 Timeout(Sec)=逾時 (秒)
 OK=確定
 Cancel=取消
+Apply=應用
 New server=新伺服器
 Move &Up=上移 (&U)
 Move D&own=下移 (&O)
@@ -73,6 +74,9 @@ Proxy Type=Proxy 類型
 Proxy Addr=Proxy 位址
 Proxy Port=Proxy 連接埠
 If server has a plugin, proxy will not be used=若伺服器含有外掛程式，Proxy 將不被使用
+Use Auth=使用認證
+Auth User=認證用戶
+Auth Pwd=認證口令
 
 # Log Form
 
@@ -114,10 +118,10 @@ Reg Hotkeys At Startup=啟動時註冊快速鍵
 
 Shadowsocks Error: {0}=Shadowsocks 錯誤: {0}
 Port {0} already in use=連接埠號碼 {0} 已被使用
+Port {0} is reserved by system=連接埠號碼 {0} 由系統保留
 Invalid server address=無效伺服器位址
 Illegal port number format=無效連接埠號碼格式
 Illegal timeout format=無效逾時格式
-Please add at least one server=請新增至少一個伺服器
 Server IP can not be blank=伺服器 IP 不能為空
 Password can not be blank=密碼不能為空
 Port out of range=連接埠號碼超出範圍
@@ -148,3 +152,5 @@ Proxy handshake failed=Proxy 交握失敗
 Register hotkey failed=註冊快速鍵失敗
 Cannot parse hotkey: {0}=剖析快速鍵失敗: {0}
 Timeout is invalid, it should not exceed {0}=逾時無效，不應超過 {0}
+Auth user can not be blank=認證用戶不能為空
+Auth pwd can not be blank=認證口令不能為空

@@ -49,9 +49,11 @@
             this.PluginArgumentsTextBox = new System.Windows.Forms.TextBox();
             this.PluginArgumentsLabel = new System.Windows.Forms.Label();
             this.RemarksLabel = new System.Windows.Forms.Label();
+            this.NeedPluginArgCheckBox = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.OKButton = new System.Windows.Forms.Button();
             this.MyCancelButton = new System.Windows.Forms.Button();
+            this.ApplyButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.AddButton = new System.Windows.Forms.Button();
             this.ServerGroupBox = new System.Windows.Forms.GroupBox();
@@ -86,7 +88,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.PluginOptionsLabel, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.PluginTextBox, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.RemarksTextBox, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.RemarksTextBox, 1, 10);
             this.tableLayoutPanel1.Controls.Add(this.IPLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.ServerPortLabel, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.PasswordLabel, 0, 2);
@@ -95,19 +97,20 @@
             this.tableLayoutPanel1.Controls.Add(this.PasswordTextBox, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.EncryptionLabel, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.EncryptionSelect, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.TimeoutLabel, 0, 10);
-            this.tableLayoutPanel1.Controls.Add(this.TimeoutTextBox, 1, 10);
+            this.tableLayoutPanel1.Controls.Add(this.TimeoutLabel, 0, 11);
+            this.tableLayoutPanel1.Controls.Add(this.TimeoutTextBox, 1, 11);
             this.tableLayoutPanel1.Controls.Add(this.PluginLabel, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.PluginOptionsTextBox, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.ShowPasswdCheckBox, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.PluginArgumentsTextBox, 1, 7);
-            this.tableLayoutPanel1.Controls.Add(this.PluginArgumentsLabel, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.RemarksLabel, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.PluginArgumentsTextBox, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.PluginArgumentsLabel, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.RemarksLabel, 0, 10);
+            this.tableLayoutPanel1.Controls.Add(this.NeedPluginArgCheckBox, 1, 7);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 21);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(3);
-            this.tableLayoutPanel1.RowCount = 11;
+            this.tableLayoutPanel1.RowCount = 12;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -119,7 +122,8 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(279, 270);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(279, 292);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // PluginOptionsLabel
@@ -131,7 +135,7 @@
             this.PluginOptionsLabel.Size = new System.Drawing.Size(89, 12);
             this.PluginOptionsLabel.TabIndex = 6;
             this.PluginOptionsLabel.Text = "Plugin Options";
-            this.toolTip1.SetToolTip(this.PluginOptionsLabel, "Environment variables");
+            this.toolTip1.SetToolTip(this.PluginOptionsLabel, "Environment variables for plugin program");
             // 
             // PluginTextBox
             // 
@@ -146,7 +150,7 @@
             // RemarksTextBox
             // 
             this.RemarksTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.RemarksTextBox.Location = new System.Drawing.Point(113, 216);
+            this.RemarksTextBox.Location = new System.Drawing.Point(113, 238);
             this.RemarksTextBox.MaxLength = 32;
             this.RemarksTextBox.Name = "RemarksTextBox";
             this.RemarksTextBox.Size = new System.Drawing.Size(160, 21);
@@ -262,7 +266,7 @@
             // 
             this.TimeoutLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.TimeoutLabel.AutoSize = true;
-            this.TimeoutLabel.Location = new System.Drawing.Point(30, 247);
+            this.TimeoutLabel.Location = new System.Drawing.Point(30, 269);
             this.TimeoutLabel.Name = "TimeoutLabel";
             this.TimeoutLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.TimeoutLabel.Size = new System.Drawing.Size(77, 12);
@@ -272,7 +276,7 @@
             // TimeoutTextBox
             // 
             this.TimeoutTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.TimeoutTextBox.Location = new System.Drawing.Point(113, 243);
+            this.TimeoutTextBox.Location = new System.Drawing.Point(113, 265);
             this.TimeoutTextBox.MaxLength = 5;
             this.TimeoutTextBox.Name = "TimeoutTextBox";
             this.TimeoutTextBox.Size = new System.Drawing.Size(160, 21);
@@ -315,7 +319,7 @@
             // PluginArgumentsTextBox
             // 
             this.PluginArgumentsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.PluginArgumentsTextBox.Location = new System.Drawing.Point(113, 189);
+            this.PluginArgumentsTextBox.Location = new System.Drawing.Point(113, 211);
             this.PluginArgumentsTextBox.MaxLength = 512;
             this.PluginArgumentsTextBox.Name = "PluginArgumentsTextBox";
             this.PluginArgumentsTextBox.Size = new System.Drawing.Size(160, 21);
@@ -326,23 +330,34 @@
             // 
             this.PluginArgumentsLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.PluginArgumentsLabel.AutoSize = true;
-            this.PluginArgumentsLabel.Location = new System.Drawing.Point(6, 193);
+            this.PluginArgumentsLabel.Location = new System.Drawing.Point(6, 215);
             this.PluginArgumentsLabel.Name = "PluginArgumentsLabel";
             this.PluginArgumentsLabel.Size = new System.Drawing.Size(101, 12);
             this.PluginArgumentsLabel.TabIndex = 7;
             this.PluginArgumentsLabel.Text = "Plugin Arguments";
-            this.toolTip1.SetToolTip(this.PluginArgumentsLabel, "Not SIP003 standard. Used as CLI arguments.\r\nMandatory:\r\n%SS_LOCAL_HOST%, %SS_LOC" +
-        "SL_PORT%, %SS_REMOTE_HOST%, %SS_REMOTE_PORT%\r\nOptional:\r\n%SS_PLUGIN_OPTIONS%");
+            this.toolTip1.SetToolTip(this.PluginArgumentsLabel, "Not a SIP003 standard. Used as CLI arguments.\r\nMandatory:\r\n%SS_LOCAL_HOST%, %SS_L" +
+        "OCAL_PORT%, %SS_REMOTE_HOST%, %SS_REMOTE_PORT%\r\nOptional:\r\n%SS_PLUGIN_OPTIONS%");
             // 
             // RemarksLabel
             // 
             this.RemarksLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.RemarksLabel.AutoSize = true;
-            this.RemarksLabel.Location = new System.Drawing.Point(60, 220);
+            this.RemarksLabel.Location = new System.Drawing.Point(60, 242);
             this.RemarksLabel.Name = "RemarksLabel";
             this.RemarksLabel.Size = new System.Drawing.Size(47, 12);
             this.RemarksLabel.TabIndex = 8;
             this.RemarksLabel.Text = "Remarks";
+            // 
+            // NeedPluginArgCheckBox
+            // 
+            this.NeedPluginArgCheckBox.AutoSize = true;
+            this.NeedPluginArgCheckBox.Location = new System.Drawing.Point(113, 189);
+            this.NeedPluginArgCheckBox.Name = "NeedPluginArgCheckBox";
+            this.NeedPluginArgCheckBox.Size = new System.Drawing.Size(144, 16);
+            this.NeedPluginArgCheckBox.TabIndex = 10;
+            this.NeedPluginArgCheckBox.Text = "Need Plugin Argument";
+            this.NeedPluginArgCheckBox.UseVisualStyleBackColor = true;
+            this.NeedPluginArgCheckBox.CheckedChanged += new System.EventHandler(this.UsePluginArgCheckBox_CheckedChanged);
             // 
             // panel2
             // 
@@ -372,13 +387,26 @@
             this.MyCancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.MyCancelButton.Dock = System.Windows.Forms.DockStyle.Right;
             this.MyCancelButton.Location = new System.Drawing.Point(84, 3);
-            this.MyCancelButton.Margin = new System.Windows.Forms.Padding(3, 3, 0, 0);
+            this.MyCancelButton.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.MyCancelButton.Name = "MyCancelButton";
             this.MyCancelButton.Size = new System.Drawing.Size(75, 23);
             this.MyCancelButton.TabIndex = 18;
             this.MyCancelButton.Text = "Cancel";
             this.MyCancelButton.UseVisualStyleBackColor = true;
             this.MyCancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            // 
+            // ApplyButton
+            // 
+            this.ApplyButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.ApplyButton.Enabled = false;
+            this.ApplyButton.Location = new System.Drawing.Point(165, 3);
+            this.ApplyButton.Margin = new System.Windows.Forms.Padding(3, 3, 0, 0);
+            this.ApplyButton.Name = "ApplyButton";
+            this.ApplyButton.Size = new System.Drawing.Size(75, 23);
+            this.ApplyButton.TabIndex = 19;
+            this.ApplyButton.Text = "Apply";
+            this.ApplyButton.UseVisualStyleBackColor = true;
+            this.ApplyButton.Click += new System.EventHandler(this.ApplyButton_Click);
             // 
             // DeleteButton
             // 
@@ -412,7 +440,7 @@
             this.ServerGroupBox.Location = new System.Drawing.Point(178, 0);
             this.ServerGroupBox.Margin = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.ServerGroupBox.Name = "ServerGroupBox";
-            this.ServerGroupBox.Size = new System.Drawing.Size(290, 308);
+            this.ServerGroupBox.Size = new System.Drawing.Size(290, 330);
             this.ServerGroupBox.TabIndex = 0;
             this.ServerGroupBox.TabStop = false;
             this.ServerGroupBox.Text = "Server";
@@ -449,7 +477,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(468, 404);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(468, 426);
             this.tableLayoutPanel2.TabIndex = 7;
             // 
             // tableLayoutPanel6
@@ -462,7 +490,7 @@
             this.tableLayoutPanel6.Controls.Add(this.MoveDownButton, 1, 0);
             this.tableLayoutPanel6.Controls.Add(this.MoveUpButton, 0, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 372);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 394);
             this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
@@ -506,7 +534,7 @@
             this.tableLayoutPanel5.Controls.Add(this.ProxyPortTextBox, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.ProxyPortLabel, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.PortableModeCheckBox, 0, 1);
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(166, 308);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(166, 330);
             this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.Padding = new System.Windows.Forms.Padding(3);
@@ -553,19 +581,21 @@
             // 
             this.tableLayoutPanel3.AutoSize = true;
             this.tableLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnCount = 3;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Controls.Add(this.MyCancelButton, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.OKButton, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.ApplyButton, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(309, 375);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(228, 397);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(159, 26);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(240, 26);
             this.tableLayoutPanel3.TabIndex = 8;
             // 
             // tableLayoutPanel4
@@ -579,7 +609,7 @@
             this.tableLayoutPanel4.Controls.Add(this.DeleteButton, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.AddButton, 0, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 308);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 330);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
@@ -650,6 +680,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button OKButton;
         private System.Windows.Forms.Button MyCancelButton;
+        private System.Windows.Forms.Button ApplyButton;
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.GroupBox ServerGroupBox;
@@ -678,6 +709,7 @@
         private System.Windows.Forms.Label PluginArgumentsLabel;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.CheckBox PortableModeCheckBox;
+        private System.Windows.Forms.CheckBox NeedPluginArgCheckBox;
     }
 }
 

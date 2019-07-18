@@ -2,21 +2,18 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Web;
 using System.Windows.Forms;
-using Newtonsoft.Json;
 
+using Shadowsocks.Controller.Service;
 using Shadowsocks.Controller.Strategy;
 using Shadowsocks.Model;
-using Shadowsocks.Properties;
 using Shadowsocks.Util;
-using System.Linq;
-using Shadowsocks.Controller.Service;
-using Shadowsocks.Proxy;
 
 namespace Shadowsocks.Controller
 {
@@ -100,10 +97,7 @@ namespace Shadowsocks.Controller
 
         protected void ReportError(Exception e)
         {
-            if (Errored != null)
-            {
-                Errored(this, new ErrorEventArgs(e));
-            }
+            Errored?.Invoke(this, new ErrorEventArgs(e));
         }
 
         public Server GetCurrentServer()
@@ -132,7 +126,7 @@ namespace Shadowsocks.Controller
         {
             foreach (var strategy in _strategyManager.GetStrategies())
             {
-                if (strategy.ID == this._config.strategy)
+                if (strategy.ID == _config.strategy)
                 {
                     return strategy;
                 }
@@ -197,9 +191,13 @@ namespace Shadowsocks.Controller
         {
             try
             {
-                if (ssURL.IsNullOrEmpty() || ssURL.IsWhiteSpace()) return false;
+                if (ssURL.IsNullOrEmpty() || ssURL.IsWhiteSpace())
+                    return false;
+
                 var servers = Server.GetServers(ssURL);
-                if (servers == null || servers.Count == 0) return false;
+                if (servers == null || servers.Count == 0)
+                    return false;
+
                 foreach (var server in servers)
                 {
                     _config.configs.Add(server);
@@ -219,30 +217,24 @@ namespace Shadowsocks.Controller
         {
             _config.enabled = enabled;
             SaveConfig(_config);
-            if (EnableStatusChanged != null)
-            {
-                EnableStatusChanged(this, new EventArgs());
-            }
+
+            EnableStatusChanged?.Invoke(this, new EventArgs());
         }
 
         public void ToggleGlobal(bool global)
         {
             _config.global = global;
             SaveConfig(_config);
-            if (EnableGlobalChanged != null)
-            {
-                EnableGlobalChanged(this, new EventArgs());
-            }
+
+            EnableGlobalChanged?.Invoke(this, new EventArgs());
         }
 
         public void ToggleShareOverLAN(bool enabled)
         {
             _config.shareOverLan = enabled;
             SaveConfig(_config);
-            if (ShareOverLANStatusChanged != null)
-            {
-                ShareOverLANStatusChanged(this, new EventArgs());
-            }
+
+            ShareOverLANStatusChanged?.Invoke(this, new EventArgs());
         }
 
         public void SaveProxy(ProxyConfig proxyConfig)
@@ -255,10 +247,8 @@ namespace Shadowsocks.Controller
         {
             _config.isVerboseLogging = enabled;
             SaveConfig(_config);
-            if (VerboseLoggingStatusChanged != null)
-            {
-                VerboseLoggingStatusChanged(this, new EventArgs());
-            }
+
+            VerboseLoggingStatusChanged?.Invoke(this, new EventArgs());
         }
 
         public void SelectServerIndex(int index)
@@ -310,19 +300,15 @@ namespace Shadowsocks.Controller
         public void TouchPACFile()
         {
             string pacFilename = _pacServer.TouchPACFile();
-            if (PACFileReadyToOpen != null)
-            {
-                PACFileReadyToOpen(this, new PathEventArgs() { Path = pacFilename });
-            }
+
+            PACFileReadyToOpen?.Invoke(this, new PathEventArgs() { Path = pacFilename });
         }
 
         public void TouchUserRuleFile()
         {
             string userRuleFilename = _pacServer.TouchUserRuleFile();
-            if (UserRuleFileReadyToOpen != null)
-            {
-                UserRuleFileReadyToOpen(this, new PathEventArgs() { Path = userRuleFilename });
-            }
+
+            UserRuleFileReadyToOpen?.Invoke(this, new PathEventArgs() { Path = userRuleFilename });
         }
 
         public string GetServerURLForCurrentServer()
@@ -381,60 +367,51 @@ namespace Shadowsocks.Controller
 
         public void UpdateStatisticsConfiguration(bool enabled)
         {
-            if (availabilityStatistics == null) return;
-            availabilityStatistics.UpdateConfiguration(this);
-            _config.availabilityStatistics = enabled;
-            SaveConfig(_config);
+            if (availabilityStatistics != null)
+            {
+                availabilityStatistics.UpdateConfiguration(this);
+                _config.availabilityStatistics = enabled;
+                SaveConfig(_config);
+            }
         }
 
         public void SavePACUrl(string pacUrl)
         {
             _config.pacUrl = pacUrl;
             SaveConfig(_config);
-            if (ConfigChanged != null)
-            {
-                ConfigChanged(this, new EventArgs());
-            }
+
+            ConfigChanged?.Invoke(this, new EventArgs());
         }
 
         public void UseOnlinePAC(bool useOnlinePac)
         {
             _config.useOnlinePac = useOnlinePac;
             SaveConfig(_config);
-            if (ConfigChanged != null)
-            {
-                ConfigChanged(this, new EventArgs());
-            }
+
+            ConfigChanged?.Invoke(this, new EventArgs());
         }
 
         public void ToggleSecureLocalPac(bool enabled)
         {
             _config.secureLocalPac = enabled;
             SaveConfig(_config);
-            if (ConfigChanged != null)
-            {
-                ConfigChanged(this, new EventArgs());
-            }
+
+            ConfigChanged?.Invoke(this, new EventArgs());
         }
 
         public void ToggleCheckingUpdate(bool enabled)
         {
             _config.autoCheckUpdate = enabled;
             Configuration.Save(_config);
-            if (ConfigChanged != null)
-            {
-                ConfigChanged(this, new EventArgs());
-            }
+
+            ConfigChanged?.Invoke(this, new EventArgs());
         }
 
         public void ToggleCheckingPreRelease(bool enabled)
         {
             _config.checkPreRelease = enabled;
             Configuration.Save(_config);
-            if (ConfigChanged != null)
-            {
-                ConfigChanged(this, new EventArgs());
-            }
+            ConfigChanged?.Invoke(this, new EventArgs());
         }
 
         public void SaveLogViewerConfig(LogViewerConfig newConfig)
@@ -442,20 +419,16 @@ namespace Shadowsocks.Controller
             _config.logViewer = newConfig;
             newConfig.SaveSize();
             Configuration.Save(_config);
-            if (ConfigChanged != null)
-            {
-                ConfigChanged(this, new EventArgs());
-            }
+
+            ConfigChanged?.Invoke(this, new EventArgs());
         }
 
         public void SaveHotkeyConfig(HotkeyConfig newConfig)
         {
             _config.hotkey = newConfig;
             SaveConfig(_config);
-            if (ConfigChanged != null)
-            {
-                ConfigChanged(this, new EventArgs());
-            }
+
+            ConfigChanged?.Invoke(this, new EventArgs());
         }
 
         public void UpdateLatency(Server server, TimeSpan latency)
@@ -506,8 +479,8 @@ namespace Shadowsocks.Controller
             if (gfwListUpdater == null)
             {
                 gfwListUpdater = new GFWListUpdater();
-                gfwListUpdater.UpdateCompleted += pacServer_PACUpdateCompleted;
-                gfwListUpdater.Error += pacServer_PACUpdateError;
+                gfwListUpdater.UpdateCompleted += PacServer_PACUpdateCompleted;
+                gfwListUpdater.Error += PacServer_PACUpdateError;
             }
 
             availabilityStatistics.UpdateConfiguration(this);
@@ -537,11 +510,13 @@ namespace Shadowsocks.Controller
 
                 TCPRelay tcpRelay = new TCPRelay(this, _config);
                 UDPRelay udpRelay = new UDPRelay(this);
-                List<Listener.IService> services = new List<Listener.IService>();
-                services.Add(tcpRelay);
-                services.Add(udpRelay);
-                services.Add(_pacServer);
-                services.Add(new PortForwarder(privoxyRunner.RunningPort));
+                List<Listener.IService> services = new List<Listener.IService>
+                {
+                    tcpRelay,
+                    udpRelay,
+                    _pacServer,
+                    new PortForwarder(privoxyRunner.RunningPort)
+                };
                 _listener = new Listener(services);
                 _listener.Start(_config);
             }
@@ -549,22 +524,22 @@ namespace Shadowsocks.Controller
             {
                 // translate Microsoft language into human language
                 // i.e. An attempt was made to access a socket in a way forbidden by its access permissions => Port already in use
-                if (e is SocketException)
+                if (e is SocketException se)
                 {
-                    SocketException se = (SocketException)e;
-                    if (se.SocketErrorCode == SocketError.AccessDenied)
+                    if (se.SocketErrorCode == SocketError.AddressAlreadyInUse)
                     {
                         e = new Exception(I18N.GetString("Port {0} already in use", _config.localPort), e);
+                    }
+                    else if (se.SocketErrorCode == SocketError.AccessDenied)
+                    {
+                        e = new Exception(I18N.GetString("Port {0} is reserved by system", _config.localPort), e);
                     }
                 }
                 Logging.LogUsefulException(e);
                 ReportError(e);
             }
 
-            if (ConfigChanged != null)
-            {
-                ConfigChanged(this, new EventArgs());
-            }
+            ConfigChanged?.Invoke(this, new EventArgs());
 
             UpdateSystemProxy();
             Utils.ReleaseMemory(true);
@@ -592,22 +567,19 @@ namespace Shadowsocks.Controller
             UpdateSystemProxy();
         }
 
-
         private void pacServer_PACSecretFileChanged(object sender, EventArgs e)
         {
             UpdateSystemProxy();
         }
 
-        private void pacServer_PACUpdateCompleted(object sender, GFWListUpdater.ResultEventArgs e)
+        private void PacServer_PACUpdateCompleted(object sender, GFWListUpdater.ResultEventArgs e)
         {
-            if (UpdatePACFromGFWListCompleted != null)
-                UpdatePACFromGFWListCompleted(this, e);
+            UpdatePACFromGFWListCompleted?.Invoke(this, e);
         }
 
-        private void pacServer_PACUpdateError(object sender, ErrorEventArgs e)
+        private void PacServer_PACUpdateError(object sender, ErrorEventArgs e)
         {
-            if (UpdatePACFromGFWListError != null)
-                UpdatePACFromGFWListError(this, e);
+            UpdatePACFromGFWListError?.Invoke(this, e);
         }
 
         private static readonly IEnumerable<char> IgnoredLineBegins = new[] { '!', '[' };
@@ -633,8 +605,10 @@ namespace Shadowsocks.Controller
 
         private void StartReleasingMemory()
         {
-            _ramThread = new Thread(new ThreadStart(ReleaseMemory));
-            _ramThread.IsBackground = true;
+            _ramThread = new Thread(new ThreadStart(ReleaseMemory))
+            {
+                IsBackground = true
+            };
             _ramThread.Start();
         }
 
@@ -658,8 +632,10 @@ namespace Shadowsocks.Controller
             {
                 trafficPerSecondQueue.Enqueue(new TrafficPerSecond());
             }
-            _trafficThread = new Thread(new ThreadStart(() => TrafficStatistics(queueMaxSize)));
-            _trafficThread.IsBackground = true;
+            _trafficThread = new Thread(new ThreadStart(() => TrafficStatistics(queueMaxSize)))
+            {
+                IsBackground = true
+            };
             _trafficThread.Start();
         }
 
@@ -669,10 +645,11 @@ namespace Shadowsocks.Controller
             while (true)
             {
                 previous = trafficPerSecondQueue.Last();
-                current = new TrafficPerSecond();
-
-                current.inboundCounter = InboundCounter;
-                current.outboundCounter = OutboundCounter;
+                current = new TrafficPerSecond
+                {
+                    inboundCounter = InboundCounter,
+                    outboundCounter = OutboundCounter
+                };
                 current.inboundIncreasement = current.inboundCounter - previous.inboundCounter;
                 current.outboundIncreasement = current.outboundCounter - previous.outboundCounter;
 

@@ -4,8 +4,8 @@ Shadowsocks=Shadowsocks
 
 # Menu items
 
-Enable System Proxy=システム プロキシを有効にする
-Mode=モード
+System Proxy=システムプロキシ
+Disable=無効
 PAC=PAC
 Global=全般
 Servers=サーバー
@@ -61,6 +61,7 @@ Remarks=付記
 Timeout(Sec)=タイムアウト (秒)
 OK=OK
 Cancel=キャンセル
+Apply=適用
 New server=新規サーバー
 Move &Up=上に移動 (&U)
 Move D&own=下に移動 (&O)
@@ -73,6 +74,9 @@ Proxy Type=プロキシの種類
 Proxy Addr=プロキシアドレス
 Proxy Port=プロキシポート
 If server has a plugin, proxy will not be used=サーバーにプラグインがある場合、プロキシは利用されません
+Use Auth=認証を利用する
+Auth User=認証ユーザ
+Auth Pwd=認証パスワード
 
 # Log Form
 
@@ -114,10 +118,10 @@ Reg Hotkeys At Startup=起動時にホットキーを登録する
 
 Shadowsocks Error: {0}=Shadowsocks エラー: {0}
 Port {0} already in use=ポート番号 {0} は既に使用されています。
+Port {0} is reserved by system= ポート番号 {0} はシステムによって予約されています
 Invalid server address=サーバーアドレスが無効です。
 Illegal port number format=ポート番号のフォーマットが無効です。
 Illegal timeout format=タイムアウト値のフォーマットが無効です。
-Please add at least one server=少なくとも一つのサーバーを指定して下さい。
 Server IP can not be blank=サーバー IP が指定されていません。
 Password can not be blank=パスワードが指定されていません。
 Port out of range=ポート番号は範囲外です。
@@ -148,3 +152,5 @@ Proxy handshake failed=プロキシ ハンドシェイクに失敗しました�
 Register hotkey failed=ホットキーの登錄に失敗しました。
 Cannot parse hotkey: {0}=ホットキーを解析できません: {0}
 Timeout is invalid, it should not exceed {0}=タイムアウト値が無効です。{0} 以下の値を指定して下さい。
+Auth user can not be blank=認証ユーザが指定されていません。
+Auth pwd can not be blank=認証パスワードが指定されていません。
